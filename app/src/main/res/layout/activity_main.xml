@@ -16,4 +16,12 @@
         app:lottie_rawRes="@raw/beer_tap"
         />
 
+    <TextView
+        android:id="@+id/instructionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="27dp"
+        android:text="@string/empty_glass_instruction"/>
+
 </LinearLayout>
