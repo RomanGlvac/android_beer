@@ -7,42 +7,51 @@ import android.view.View
 import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.model.KeyPath
+import com.example.android.androidbeer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val animationView : LottieAnimationView = findViewById(R.id.animationView)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val animationView : LottieAnimationView = binding.animationView
 
         animationView.setOnClickListener {
-            playAnimation(it as LottieAnimationView)
+            // playAnimation(it as LottieAnimationView)
+            playAnimation()
         }
 
-        animationView.addAnimatorListener(object : Animator.AnimatorListener {
-            val textView : TextView = findViewById(R.id.instructionTextView)
+        animationView.addAnimatorListener(
+            object : Animator.AnimatorListener {
+                val textView : TextView = binding.instructionTextView
 
-            override fun onAnimationStart(p0: Animator?) {
-                textView.text = getString(R.string.filling_glass_instruciton)
+                override fun onAnimationStart(p0: Animator?) {
+                    textView.text = getString(R.string.filling_glass_instruciton)
+                }
+
+                override fun onAnimationEnd(p0: Animator?) {
+                    textView.text = getString(R.string.full_glass_instruction)
+                }
+
+                override fun onAnimationCancel(p0: Animator?) {}
+
+                override fun onAnimationRepeat(p0: Animator?) {}
+
             }
-
-            override fun onAnimationEnd(p0: Animator?) {
-                textView.text = getString(R.string.full_glass_instruction)
-            }
-
-            override fun onAnimationCancel(p0: Animator?) {}
-
-            override fun onAnimationRepeat(p0: Animator?) {}
-
-        })
+        )
 
     }
 
-    private fun playAnimation(view : LottieAnimationView){
-        if (view.progress == 1.0f){
-            view.progress = 0.0f
-            findViewById<TextView>(R.id.instructionTextView).text = getString(R.string.empty_glass_instruction)
+    private fun playAnimation(){
+        if (binding.animationView.progress == 1.0f){
+            binding.animationView.progress = 0.0f
+            binding.instructionTextView.text = getString(R.string.empty_glass_instruction)
         } else {
-            view.playAnimation()
+            binding.animationView.playAnimation()
         }
     }
+
 }
