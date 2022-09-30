@@ -3,6 +3,7 @@ package com.example.android.androidbeer
 import android.animation.Animator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
@@ -43,6 +44,16 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("MainActivity", "onPause() called.")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("MainActivity", "onStop() called.")
     }
 
     private fun playAnimation(){
