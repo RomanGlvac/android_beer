@@ -10,7 +10,7 @@ class SideActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySideBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val userAnswer = intent.getStringExtra("userAnswer")
+        val userAnswer = intent.getStringExtra("EXTRA_USER_ANSWER")
         binding.userAnswerTextView.text = userAnswer
     }
 }

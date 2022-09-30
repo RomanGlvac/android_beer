@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         submitBtn.setOnClickListener{
             Intent(this, SideActivity::class.java).also {
                 val userAnswer = binding.userAnswerEditText.text.toString()
-                it.putExtra("userAnswer", userAnswer)
+                it.putExtra("EXTRA_USER_ANSWER", userAnswer)
                 startActivity(it)
             }
         }
