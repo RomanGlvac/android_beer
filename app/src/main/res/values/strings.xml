@@ -3,4 +3,6 @@
     <string name="empty_glass_instruction">Tap the glass to get a beer!</string>
     <string name="full_glass_instruction">Tap the full glass to empty it!</string>
     <string name="filling_glass_instruciton">Wait for the glass to fill up!</string>
+    <string name="submit_btn_text">Submit</string>
+    <string name="edit_text_hint">How much do you like beer?</string>
 </resources>
