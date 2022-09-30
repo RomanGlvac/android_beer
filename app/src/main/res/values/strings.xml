@@ -6,4 +6,5 @@
     <string name="submit_btn_text">Submit</string>
     <string name="edit_text_hint">How much do you like beer?</string>
     <string name="hard_text">You like beer:</string>
+    <string name="go_back_button">Go back</string>
 </resources>

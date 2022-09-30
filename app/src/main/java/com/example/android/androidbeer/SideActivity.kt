@@ -12,5 +12,9 @@ class SideActivity : AppCompatActivity() {
         setContentView(binding.root)
         val userAnswer = intent.getStringExtra("EXTRA_USER_ANSWER")
         binding.userAnswerTextView.text = userAnswer
+
+        binding.goBackButton.setOnClickListener{
+            finish()
+        }
     }
 }
