@@ -5,4 +5,5 @@
     <string name="filling_glass_instruciton">Wait for the glass to fill up!</string>
     <string name="submit_btn_text">Submit</string>
     <string name="edit_text_hint">How much do you like beer?</string>
+    <string name="hard_text">You like beer:</string>
 </resources>

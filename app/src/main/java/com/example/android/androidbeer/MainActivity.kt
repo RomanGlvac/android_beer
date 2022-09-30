@@ -1,9 +1,11 @@
 package com.example.android.androidbeer
 
 import android.animation.Animator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.model.KeyPath
@@ -18,12 +20,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val animationView : LottieAnimationView = binding.animationView
+        val submitBtn : Button = binding.submitButton
 
         animationView.setOnClickListener {
-            // playAnimation(it as LottieAnimationView)
             playAnimation()
         }
-
         animationView.addAnimatorListener(
             object : Animator.AnimatorListener {
                 val textView : TextView = binding.instructionTextView
@@ -42,6 +43,15 @@ class MainActivity : AppCompatActivity() {
 
             }
         )
+
+        submitBtn.setOnClickListener{
+            Intent(this, SideActivity::class.java).also {
+                val userAnswer = binding.userAnswerEditText.text.toString()
+                it.putExtra("userAnswer", userAnswer)
+                startActivity(it)
+            }
+        }
+
 
     }
 
