@@ -2,11 +2,14 @@ package com.example.android.androidbeer
 
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.android.androidbeer.databinding.FragmentAnimationBinding
 
 
@@ -14,14 +17,22 @@ class AnimationFragment : Fragment() {
 
     private var _binding : FragmentAnimationBinding? = null
     private val binding get() = _binding!!
+    private val args : AnimationFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAnimationBinding.inflate(inflater, container, false)
+        setTextViews()
+        setButtonListeners()
         setAnimationListeners()
         return binding.root
+    }
+
+    private fun setTextViews(){
+        binding.tvUsername.text = args.userName
+        binding.tvEstablishment.text = args.establishmentName
     }
 
     private fun setAnimationListeners(){
@@ -50,6 +61,17 @@ class AnimationFragment : Fragment() {
             binding.animationView.playAnimation()
             binding.instructionTextView.text = getString(R.string.filling_glass_instruction)
         }
+    }
+
+    private fun setButtonListeners(){
+        binding.btnShowMap.setOnClickListener { openMap() }
+    }
+
+    private fun openMap(){
+        val latitude : String = args.latitude
+        val longitude : String = args.longitude
+        val intent : Intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:$latitude,$longitude"))
+        startActivity(intent)
     }
 
 }
