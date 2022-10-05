@@ -18,32 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val animationView : LottieAnimationView = binding.animationView
-
-        animationView.setOnClickListener {
-            // playAnimation(it as LottieAnimationView)
-            playAnimation()
-        }
-
-        animationView.addAnimatorListener(
-            object : Animator.AnimatorListener {
-                val textView : TextView = binding.instructionTextView
-
-                override fun onAnimationStart(p0: Animator?) {
-                    textView.text = getString(R.string.filling_glass_instruciton)
-                }
-
-                override fun onAnimationEnd(p0: Animator?) {
-                    textView.text = getString(R.string.full_glass_instruction)
-                }
-
-                override fun onAnimationCancel(p0: Animator?) {}
-
-                override fun onAnimationRepeat(p0: Animator?) {}
-
-            }
-        )
-
     }
 
     override fun onPause() {
@@ -54,15 +28,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.d("MainActivity", "onStop() called.")
-    }
-
-    private fun playAnimation(){
-        if (binding.animationView.progress == 1.0f){
-            binding.animationView.progress = 0.0f
-            binding.instructionTextView.text = getString(R.string.empty_glass_instruction)
-        } else {
-            binding.animationView.playAnimation()
-        }
     }
 
 }
