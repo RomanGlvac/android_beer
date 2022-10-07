@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_formFragment_to_animationFragment"
             app:destination="@id/animationFragment" />
+        <action
+            android:id="@+id/action_formFragment_to_recyclerFragment"
+            app:destination="@id/recyclerFragment" />
     </fragment>
     <fragment
         android:id="@+id/animationFragment"
@@ -32,4 +35,9 @@
             android:name="longitude"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/recyclerFragment"
+        android:name="com.example.android.androidbeer.RecyclerFragment"
+        android:label="fragment_recycler"
+        tools:layout="@layout/fragment_recycler" />
 </navigation>
