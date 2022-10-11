@@ -8,7 +8,7 @@
     tools:context=".RecyclerFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStuff"
+        android:id="@+id/rvPubs"
         android:layout_height="0dp"
         android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
