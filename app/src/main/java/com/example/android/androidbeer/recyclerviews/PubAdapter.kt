@@ -7,7 +7,8 @@ import com.example.android.androidbeer.databinding.ItemPubBinding
 import com.example.android.androidbeer.models.PubModel
 
 class PubAdapter(
-    val pubList : ArrayList<PubModel>
+    private val pubList : ArrayList<PubModel>,
+    private val clickListener : RecyclerViewClickListener
 ) : RecyclerView.Adapter<PubAdapter.PubViewHolder>(){
 
 
@@ -22,6 +23,7 @@ class PubAdapter(
         // Binding data to items.
         holder.binding.apply {
             tvTitle.text = pubList[position].tags.name
+            tvWebsite.text = pubList[position].tags.website
         }
     }
 
@@ -29,5 +31,16 @@ class PubAdapter(
         return pubList.size
     }
 
-    inner class PubViewHolder(val binding : ItemPubBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class PubViewHolder(val binding : ItemPubBinding) : RecyclerView.ViewHolder(binding.root){
+        init {
+            itemView.setOnClickListener{
+                clickListener.onClick(absoluteAdapterPosition)
+            }
+            binding.btnDelete.setOnClickListener {
+                pubList.removeAt(absoluteAdapterPosition)
+                notifyDataSetChanged()
+            }
+        }
+    }
+
 }
