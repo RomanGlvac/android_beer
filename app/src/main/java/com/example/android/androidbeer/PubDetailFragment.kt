@@ -30,6 +30,7 @@ class PubDetailFragment : Fragment() {
             tvTitle.text = args.name
             tvWebsite.text = args.website
             tvOperator.text = args.operator
+            tvOpeningHours.text = args.openingHours
         }
     }
 

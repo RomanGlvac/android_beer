@@ -40,7 +40,8 @@ class RecyclerFragment : Fragment() {
                     pub.pubInfo.name,
                     pub.pubInfo.website,
                     pub.pubInfo.operator,
-                    position
+                    position,
+                    pub.pubInfo.openingHours
                 )
                 container.findNavController().navigate(action)
             }

@@ -25,6 +25,6 @@ data class PubTags(
     val name : String,
     val operator : String,
     val website : String,
-    @SerializedName("opening_hours")
+    @SerializedName("opening_hours", alternate = ["opening_hours:covid19"])
     val openingHours : String
 )

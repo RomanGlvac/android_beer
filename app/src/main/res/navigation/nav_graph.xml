@@ -65,5 +65,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <argument
+            android:name="openingHours"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>
