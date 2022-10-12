@@ -31,6 +31,7 @@ class RecyclerFragment : Fragment() {
     ): View? {
         _binding = FragmentRecyclerBinding.inflate(inflater, container, false)
         initRecyclerView(container!!)
+        setButtonListeners()
         return binding.root
     }
 
@@ -50,6 +51,14 @@ class RecyclerFragment : Fragment() {
         })
         binding.rvPubs.adapter = adapter
         binding.rvPubs.layoutManager = LinearLayoutManager(this.context)
+    }
+
+    private fun setButtonListeners(){
+        binding.apply {
+            val adapter = rvPubs.adapter as PubAdapter
+            btnSortAsc.setOnClickListener{ adapter.sortItems() }
+            btnSortDesc.setOnClickListener{ adapter.sortItems(true) }
+        }
     }
 
 }
