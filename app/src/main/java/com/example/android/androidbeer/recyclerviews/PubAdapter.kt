@@ -37,8 +37,9 @@ class PubAdapter(
                 clickListener.onClick(absoluteAdapterPosition)
             }
             binding.btnDelete.setOnClickListener {
-                pubList.removeAt(absoluteAdapterPosition)
-                notifyDataSetChanged()
+                val position = absoluteAdapterPosition
+                pubList.removeAt(position)
+                notifyItemRemoved(position)
             }
         }
     }
