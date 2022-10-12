@@ -59,5 +59,11 @@
             android:name="operator"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_pubDetailFragment_to_recyclerFragment3"
+            app:destination="@id/recyclerFragment" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
 </navigation>

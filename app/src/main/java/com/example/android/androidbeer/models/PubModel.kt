@@ -1,8 +1,12 @@
 package com.example.android.androidbeer.models
 
-data class Pubs(
+data class PubHolder(
     val elements : ArrayList<PubModel>
-)
+){
+    fun removePub(position : Int){
+        elements.removeAt(position)
+    }
+}
 
 data class PubModel(
     val lat : String,

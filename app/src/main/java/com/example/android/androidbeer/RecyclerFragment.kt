@@ -1,23 +1,21 @@
 package com.example.android.androidbeer
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.android.androidbeer.databinding.FragmentRecyclerBinding
-import com.example.android.androidbeer.models.PubModel
-import com.example.android.androidbeer.models.Pubs
+import com.example.android.androidbeer.models.PubHolder
 import com.example.android.androidbeer.recyclerviews.PubAdapter
 import com.example.android.androidbeer.recyclerviews.RecyclerViewClickListener
+import com.example.android.androidbeer.recyclerviews.RecyclerViewSortingListener
 import com.example.android.androidbeer.tools.JsonLoader
 import com.google.gson.Gson
-import com.google.gson.JsonArray
-import org.json.JSONObject
+import java.util.*
 
 
 class RecyclerFragment : Fragment() {
@@ -35,18 +33,47 @@ class RecyclerFragment : Fragment() {
         return binding.root
     }
 
+    @Suppress("SENSELESS_COMPARISON")
     private fun initRecyclerView(container : ViewGroup){
-        val json = JsonLoader.openJson(container!!.context, "pubs.json")!!
-        val pubs = Gson().fromJson(json, Pubs::class.java)
-        val adapter = PubAdapter(pubs.elements, object : RecyclerViewClickListener {
+        val pubs = (activity as MainActivity).pubHolder
+        val adapter = PubAdapter(pubs.elements)
+        adapter.setClickListener(object : RecyclerViewClickListener {
             override fun onClick(position: Int) {
                 val pub = pubs.elements[position]
                 val action = RecyclerFragmentDirections.actionRecyclerFragmentToPubDetailFragment(
                     pub.tags.name,
                     pub.tags.website,
-                    pub.tags.operator
+                    pub.tags.operator,
+                    position
                 )
                 container.findNavController().navigate(action)
+            }
+        })
+        adapter.setSortListener(object : RecyclerViewSortingListener {
+            override fun sortItems(desc: Boolean) {
+                if(!desc){
+                    adapter.pubList.sortBy {
+                        if(it.tags.name != null){
+                            it.tags.name.replaceFirstChar {
+                                if (it.isLowerCase()) it.titlecase(
+                                    Locale.getDefault()
+                                ) else it.toString()
+                            }
+                        }
+                        else { it.tags.name }
+                    }
+                } else {
+                    adapter.pubList.sortByDescending {
+                        if(it.tags.name != null){
+                            it.tags.name.replaceFirstChar {
+                                if (it.isLowerCase()) it.titlecase(
+                                    Locale.getDefault()
+                                ) else it.toString()
+                            }
+                        }
+                        else { it.tags.name }
+                    }
+                }
             }
         })
         binding.rvPubs.adapter = adapter

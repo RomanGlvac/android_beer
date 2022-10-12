@@ -1,18 +1,27 @@
 package com.example.android.androidbeer.recyclerviews
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.text.capitalize
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.androidbeer.databinding.ItemPubBinding
 import com.example.android.androidbeer.models.PubModel
-import java.util.*
 import kotlin.collections.ArrayList
 
 class PubAdapter(
-    private val pubList : ArrayList<PubModel>,
-    private val clickListener : RecyclerViewClickListener
+    val pubList : ArrayList<PubModel>,
 ) : RecyclerView.Adapter<PubAdapter.PubViewHolder>(){
+
+    private lateinit var clickListener : RecyclerViewClickListener
+    private lateinit var sortListener: RecyclerViewSortingListener
+
+    fun setClickListener(listener: RecyclerViewClickListener){
+        clickListener = listener
+    }
+
+    fun setSortListener(listener: RecyclerViewSortingListener){
+        sortListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PubViewHolder {
         // Creating an instance of the view which holds a single recycler view item.
@@ -33,20 +42,9 @@ class PubAdapter(
         return pubList.size
     }
 
-    @Suppress("SENSELESS_COMPARISON")
-    fun sortItems(descending : Boolean = false){
-        if (!descending) {
-            pubList.sortBy { if(it.tags.name != null) {
-                it.tags.name.uppercase()
-            } else {
-                it.tags.name }
-            }
-        } else {
-            pubList.sortByDescending { if(it.tags.name != null) {
-                it.tags.name.uppercase()
-            } else {
-                it.tags.name } }
-        }
+    @SuppressLint("NotifyDataSetChanged")
+    fun sortItems(desc : Boolean = false){
+        sortListener.sortItems(desc)
         notifyDataSetChanged()
     }
 
