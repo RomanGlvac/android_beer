@@ -1,17 +1,23 @@
 package com.example.android.androidbeer.models
 
+import com.google.gson.annotations.SerializedName
+
 data class PubHolder(
-    val elements : ArrayList<PubModel>
+    @SerializedName("elements")
+    val pubs : ArrayList<PubModel>
 ){
     fun removePub(position : Int){
-        elements.removeAt(position)
+        pubs.removeAt(position)
     }
 }
 
 data class PubModel(
-    val lat : String,
-    val lon : String,
-    val tags: PubTags
+    @SerializedName("lat")
+    val latitude : String,
+    @SerializedName("lon")
+    val longitude : String,
+    @SerializedName("tags")
+    val pubInfo: PubTags
 )
 
 data class PubTags(
@@ -19,5 +25,6 @@ data class PubTags(
     val name : String,
     val operator : String,
     val website : String,
-    val opening_hours : String
+    @SerializedName("opening_hours")
+    val openingHours : String
 )

@@ -33,8 +33,8 @@ class PubAdapter(
     override fun onBindViewHolder(holder: PubViewHolder, position: Int) {
         // Binding data to items.
         holder.binding.apply {
-            tvTitle.text = pubList[position].tags.name
-            tvWebsite.text = pubList[position].tags.website
+            tvTitle.text = pubList[position].pubInfo.name
+            tvWebsite.text = pubList[position].pubInfo.website
         }
     }
 
