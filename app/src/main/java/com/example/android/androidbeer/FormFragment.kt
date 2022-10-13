@@ -30,10 +30,6 @@ class FormFragment : Fragment() {
             )
             it.findNavController().navigate(action)
         }
-
-        binding.btnGotoRecycler.setOnClickListener {
-            it.findNavController().navigate(R.id.action_formFragment_to_recyclerFragment)
-        }
         return binding.root
     }
 
