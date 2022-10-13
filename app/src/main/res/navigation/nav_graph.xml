@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/formFragment">
+    app:startDestination="@id/recyclerFragment">
 
     <fragment
         android:id="@+id/formFragment"
@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_formFragment_to_animationFragment"
             app:destination="@id/animationFragment" />
-        <action
-            android:id="@+id/action_formFragment_to_recyclerFragment"
-            app:destination="@id/recyclerFragment" />
     </fragment>
     <fragment
         android:id="@+id/animationFragment"
@@ -43,6 +40,9 @@
         <action
             android:id="@+id/action_recyclerFragment_to_pubDetailFragment"
             app:destination="@id/pubDetailFragment" />
+        <action
+            android:id="@+id/action_recyclerFragment_to_formFragment"
+            app:destination="@id/formFragment" />
     </fragment>
     <fragment
         android:id="@+id/pubDetailFragment"
