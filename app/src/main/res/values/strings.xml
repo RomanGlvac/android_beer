@@ -3,6 +3,6 @@
     <string name="empty_glass_instruction">Tap the glass to get a beer!</string>
     <string name="full_glass_instruction">Tap the full glass to empty it!</string>
     <string name="filling_glass_instruction">Wait for the glass to fill up!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>
