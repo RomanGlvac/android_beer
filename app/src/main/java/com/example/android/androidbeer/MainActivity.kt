@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private lateinit var navController : NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var listener : NavController.OnDestinationChangedListener
 
     private var _pubHolder : PubHolder? = null
     val pubHolder get() = _pubHolder!!
