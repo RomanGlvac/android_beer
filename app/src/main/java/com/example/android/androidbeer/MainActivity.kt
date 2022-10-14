@@ -1,12 +1,10 @@
 package com.example.android.androidbeer
 
-import android.animation.Animator
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -38,13 +36,8 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         var navController : NavController? = null
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
-        if (navHostFragment != null) {
-            navController = navHostFragment.findNavController()
-        }
-        if (navController != null) {
-            return navController.navigateUp(appBarConfiguration)
-        }
-        return super.onSupportNavigateUp()
+        navController = navHostFragment?.findNavController()
+        return navController?.navigateUp(appBarConfiguration) == true || super.onSupportNavigateUp()
     }
 
     private fun setupNavigationDrawer(){
@@ -59,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadPubList(){
-        val json = JsonLoader.openJson(applicationContext, "pubs.json")!!
+        val json = JsonLoader.openJson(applicationContext, "pubs.json")
         _pubHolder = Gson().fromJson(json, PubHolder::class.java)
     }
 
