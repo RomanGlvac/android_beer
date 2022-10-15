@@ -36,9 +36,9 @@ class PubDetailFragment : Fragment() {
 
     private fun initButton(){
         binding.btnDelete.setOnClickListener {
-            (activity as MainActivity).pubHolder.removePub(args.position)
-            val action = PubDetailFragmentDirections.actionPubDetailFragmentToRecyclerFragment3()
-            binding.root.findNavController().navigate(action)
+            val activity : MainActivity = this.activity as MainActivity
+            activity.pubHolder.removePub(args.position)
+            activity.onBackPressed()
         }
     }
 
