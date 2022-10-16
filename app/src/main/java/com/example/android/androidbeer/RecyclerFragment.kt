@@ -33,7 +33,7 @@ class RecyclerFragment : Fragment() {
     @Suppress("SENSELESS_COMPARISON")
     private fun initRecyclerView(container : ViewGroup){
         // val pubs = (activity as MainActivity).pubHolder
-        val pubs = PubManager.getPubs(binding.root.context)!!
+        val pubs = PubManager.getPubHolder(binding.root.context)!!
         val adapter = PubAdapter(pubs.pubs)
         adapter.setClickListener(object : RecyclerViewClickListener {
             override fun onClick(position: Int) {

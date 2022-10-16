@@ -8,7 +8,7 @@ object PubManager {
     private var pubHolder : PubHolder? = null
     private const val PUB_FILE_NAME = "pubs.json"
 
-    fun getPubs(context : Context) : PubHolder? {
+    fun getPubHolder(context : Context) : PubHolder? {
         if(pubHolder == null){
             val json = JsonLoader.openJson(context, PUB_FILE_NAME)
             pubHolder = Gson().fromJson(json, PubHolder::class.java)
