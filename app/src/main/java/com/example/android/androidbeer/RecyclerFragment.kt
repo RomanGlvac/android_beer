@@ -11,6 +11,7 @@ import com.example.android.androidbeer.databinding.FragmentRecyclerBinding
 import com.example.android.androidbeer.recyclerviews.PubAdapter
 import com.example.android.androidbeer.recyclerviews.RecyclerViewClickListener
 import com.example.android.androidbeer.recyclerviews.RecyclerViewSortingListener
+import com.example.android.androidbeer.tools.PubManager
 import java.util.*
 
 
@@ -31,7 +32,8 @@ class RecyclerFragment : Fragment() {
 
     @Suppress("SENSELESS_COMPARISON")
     private fun initRecyclerView(container : ViewGroup){
-        val pubs = (activity as MainActivity).pubHolder
+        // val pubs = (activity as MainActivity).pubHolder
+        val pubs = PubManager.getPubs(binding.root.context)!!
         val adapter = PubAdapter(pubs.pubs)
         adapter.setClickListener(object : RecyclerViewClickListener {
             override fun onClick(position: Int) {

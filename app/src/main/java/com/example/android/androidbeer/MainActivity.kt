@@ -21,15 +21,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController : NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private var _pubHolder : PubHolder? = null
-    val pubHolder get() = _pubHolder!!
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupNavigationDrawer()
-        loadPubList()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -48,11 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    private fun loadPubList(){
-        val json = JsonLoader.openJson(applicationContext, "pubs.json")
-        _pubHolder = Gson().fromJson(json, PubHolder::class.java)
     }
 
     override fun onPause() {

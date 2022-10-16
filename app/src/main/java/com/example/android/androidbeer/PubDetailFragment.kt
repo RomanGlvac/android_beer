@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.androidbeer.databinding.FragmentPubDetailBinding
+import com.example.android.androidbeer.tools.PubManager
 
 
 class PubDetailFragment : Fragment() {
@@ -37,7 +38,7 @@ class PubDetailFragment : Fragment() {
     private fun initButton(){
         binding.btnDelete.setOnClickListener {
             val activity : MainActivity = this.activity as MainActivity
-            activity.pubHolder.removePub(args.position)
+            PubManager.getPubs(binding.root.context)!!.removePub(args.position)
             activity.onBackPressed()
         }
     }
