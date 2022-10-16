@@ -1,7 +1,6 @@
-package com.example.android.androidbeer
+package com.example.android.androidbeer.fragments
 
 import android.animation.Animator
-import android.animation.Animator.AnimatorListener
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import com.example.android.androidbeer.R
 import com.example.android.androidbeer.databinding.FragmentAnimationBinding
 
 

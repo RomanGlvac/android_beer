@@ -1,4 +1,4 @@
-package com.example.android.androidbeer
+package com.example.android.androidbeer.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

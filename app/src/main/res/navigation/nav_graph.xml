@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/formFragment"
-        android:name="com.example.android.androidbeer.FormFragment"
+        android:name="com.example.android.androidbeer.fragments.FormFragment"
         android:label="fragment_form"
         tools:layout="@layout/fragment_form" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/animationFragment"
-        android:name="com.example.android.androidbeer.AnimationFragment"
+        android:name="com.example.android.androidbeer.fragments.AnimationFragment"
         android:label="fragment_animation"
         tools:layout="@layout/fragment_animation" >
         <argument
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/recyclerFragment"
-        android:name="com.example.android.androidbeer.RecyclerFragment"
+        android:name="com.example.android.androidbeer.fragments.RecyclerFragment"
         android:label="fragment_recycler"
         tools:layout="@layout/fragment_recycler" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/pubDetailFragment"
-        android:name="com.example.android.androidbeer.PubDetailFragment"
+        android:name="com.example.android.androidbeer.fragments.PubDetailFragment"
         android:label="PubDetailFragment" >
         <argument
             android:name="name"
