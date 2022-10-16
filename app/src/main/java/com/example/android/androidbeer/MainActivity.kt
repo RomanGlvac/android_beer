@@ -30,15 +30,6 @@ class MainActivity : AppCompatActivity() {
         setupNavigationDrawer()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.overflow_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         var navController : NavController? = null
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
