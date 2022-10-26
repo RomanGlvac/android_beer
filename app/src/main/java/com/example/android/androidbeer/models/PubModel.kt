@@ -1,9 +1,9 @@
 package com.example.android.androidbeer.models
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class PubHolder(
-    @SerializedName("elements")
+    @Json(name = "documents")
     val pubs : ArrayList<PubModel>
 ){
     fun removePub(position : Int){
@@ -12,11 +12,11 @@ data class PubHolder(
 }
 
 data class PubModel(
-    @SerializedName("lat")
+    @Json(name = "lat")
     val latitude : String,
-    @SerializedName("lon")
+    @Json(name = "lon")
     val longitude : String,
-    @SerializedName("tags")
+    @Json(name = "tags")
     val pubInfo: PubTags
 )
 
@@ -25,6 +25,6 @@ data class PubTags(
     val name : String,
     val operator : String,
     val website : String,
-    @SerializedName("opening_hours", alternate = ["opening_hours:covid19"])
+    @Json(name = "opening_hours")
     val openingHours : String
 )
