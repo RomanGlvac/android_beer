@@ -41,15 +41,15 @@ class AnimationFragment : Fragment() {
 
         // Animation listener.
         binding.animationView.addAnimatorListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(p0: Animator?) {}
+            override fun onAnimationStart(animator: Animator) {}
 
-            override fun onAnimationEnd(p0: Animator?) {
+            override fun onAnimationEnd(animator: Animator) {
                 binding.instructionTextView.text = getString(R.string.full_glass_instruction)
             }
 
-            override fun onAnimationCancel(p0: Animator?) {}
+            override fun onAnimationCancel(animator: Animator) {}
 
-            override fun onAnimationRepeat(p0: Animator?) {}
+            override fun onAnimationRepeat(animator: Animator) {}
         })
     }
 
