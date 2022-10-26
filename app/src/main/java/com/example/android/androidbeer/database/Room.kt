@@ -10,28 +10,30 @@ import com.example.android.androidbeer.models.PubModel
 interface PubDao{
 
     @Query("SELECT * FROM pubs")
-    suspend fun getAll() : LiveData<List<PubModel>>
+    fun getAll() : LiveData<List<DatabasePubModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(pubs : List<PubModel>)
+    suspend fun insert(pubs : List<DatabasePubModel>)
 
 }
 
-
+@Database(entities = [DatabasePubModel::class], version = 2)
 abstract class PubDatabase: RoomDatabase() {
     abstract val pubDao: PubDao
 
     companion object {
-        private lateinit var INSTANCE : PubDatabase
+        @Volatile
+        var INSTANCE : PubDatabase? = null
 
         fun getDatabase(context: Context): PubDatabase {
-            synchronized(this){
-                if(INSTANCE == null){
-                    INSTANCE = Room.databaseBuilder(context, PubDatabase::class.java, "pubs").build()
-                }
-                return INSTANCE
+            return INSTANCE ?: synchronized(this){
+                val temp = Room
+                    .databaseBuilder(context, PubDatabase::class.java, "pubs")
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = temp
+                return temp
             }
-
         }
     }
 }

@@ -13,6 +13,8 @@ data class PubHolder(
 }
 
 data class PubModel(
+    @SerializedName("_id")
+    val id: String,
     @SerializedName("lat")
     val latitude : String,
     @SerializedName("lon")
@@ -22,17 +24,18 @@ data class PubModel(
 )
 
 data class PubTags(
-    val amenity : String,
-    val name : String,
-    val operator : String,
-    val website : String,
+    val amenity : String?,
+    val name : String? = "none",
+    val operator : String?,
+    val website : String?,
     @SerializedName("opening_hours", alternate = ["opening_hours:covid19"])
-    val openingHours : String
+    val openingHours : String?
 )
 
 fun PubHolder.asDatabaseModel(): List<DatabasePubModel> {
     return pubs.map {
         DatabasePubModel(
+            id = it.id,
             name = it.pubInfo.name,
             latitude = it.latitude,
             longitude = it.longitude,
