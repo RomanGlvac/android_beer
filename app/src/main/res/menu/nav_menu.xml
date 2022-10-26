@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/recyclerFragment"
-        android:title="Establishments"/>
+        android:title="Pub list"/>
 
     <item
         android:id="@+id/formFragment"
