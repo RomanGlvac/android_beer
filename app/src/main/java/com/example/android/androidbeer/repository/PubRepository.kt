@@ -26,4 +26,8 @@ class PubRepository(private val database: PubDatabase) {
             database.pubDao.insert(data.asDatabaseModel())
         }
     }
+
+    fun deletePub(position: Int){
+        pubs.value?.removePub(position)
+    }
 }

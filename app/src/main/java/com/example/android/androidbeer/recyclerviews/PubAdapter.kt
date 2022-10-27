@@ -3,24 +3,32 @@ package com.example.android.androidbeer.recyclerviews
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.androidbeer.databinding.FragmentPubDetailBinding
 import com.example.android.androidbeer.databinding.ItemPubBinding
 import com.example.android.androidbeer.models.PubModel
+import com.example.android.androidbeer.viewmodel.PubListViewModel
 import kotlin.collections.ArrayList
 
 class PubAdapter(
-    val pubList : ArrayList<PubModel>,
-) : RecyclerView.Adapter<PubAdapter.PubViewHolder>(){
+    val deleteListener: (Int) -> Unit,
+    val clickListener: (Int) -> Unit
+//    val clickListener: RecyclerViewClickListener,
+//    val sortingListener: RecyclerViewSortingListener
+) : ListAdapter<PubModel, PubAdapter.PubViewHolder>(DiffCallback) {
 
-    private lateinit var clickListener : RecyclerViewClickListener
-    private lateinit var sortListener: RecyclerViewSortingListener
 
-    fun setClickListener(listener: RecyclerViewClickListener){
-        clickListener = listener
-    }
+    companion object DiffCallback : DiffUtil.ItemCallback<PubModel>() {
+        override fun areItemsTheSame(oldItem: PubModel, newItem: PubModel): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    fun setSortListener(listener: RecyclerViewSortingListener){
-        sortListener = listener
+        override fun areContentsTheSame(oldItem: PubModel, newItem: PubModel): Boolean {
+            return areItemsTheSame(oldItem, newItem)
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PubViewHolder {
@@ -31,34 +39,27 @@ class PubAdapter(
     }
 
     override fun onBindViewHolder(holder: PubViewHolder, position: Int) {
-        // Binding data to items.
-        holder.binding.apply {
-            tvTitle.text = pubList[position].pubInfo.name
-            tvWebsite.text = pubList[position].pubInfo.website
-        }
+        val currentPub = getItem(position)
+        holder.bind(currentPub)
     }
 
-    override fun getItemCount(): Int {
-        return pubList.size
-    }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun sortItems(desc : Boolean = false){
-        sortListener.sortItems(desc)
-        notifyDataSetChanged()
-    }
-
-    inner class PubViewHolder(val binding : ItemPubBinding) : RecyclerView.ViewHolder(binding.root){
-        init {
+    inner class PubViewHolder(private val binding: ItemPubBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(pubModel: PubModel) {
+            binding.apply {
+                tvTitle.text = pubModel.pubInfo.name
+                tvWebsite.text = pubModel.pubInfo.website
+                btnDelete.setOnClickListener {
+                    val position = absoluteAdapterPosition
+                    deleteListener(position)
+                    notifyItemRemoved(position)
+                }
+            }
             itemView.setOnClickListener{
-                clickListener.onClick(absoluteAdapterPosition)
-            }
-            binding.btnDelete.setOnClickListener {
                 val position = absoluteAdapterPosition
-                pubList.removeAt(position)
-                notifyItemRemoved(position)
+                clickListener(position)
             }
         }
     }
-
 }
