@@ -20,16 +20,14 @@ import java.util.*
 
 class RecyclerFragment : Fragment() {
 
-    private var _binding: FragmentRecyclerBinding? = null
-    private val binding get() = _binding!!
-
+    private lateinit var binding: FragmentRecyclerBinding
     private val viewModel: PubListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRecyclerBinding.inflate(inflater, container, false)
+        binding = FragmentRecyclerBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         binding.rvPubs.adapter = PubAdapter(
@@ -37,16 +35,11 @@ class RecyclerFragment : Fragment() {
             clickListener = { position -> Log.d("clickListener", "Clicked at $position") }
         )
         binding.rvPubs.layoutManager = LinearLayoutManager(binding.root.context)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.refreshPubs()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
         return binding.root
     }
-
-//
-//    private fun setButtonListeners(){
-//        binding.apply {
-//            val adapter = rvPubs.adapter as PubAdapter
-//            btnSortAsc.setOnClickListener{ adapter.sortItems() }
-//            btnSortDesc.setOnClickListener{ adapter.sortItems(true) }
-//        }
-//    }
 
 }

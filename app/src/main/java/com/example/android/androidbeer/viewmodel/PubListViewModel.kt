@@ -17,7 +17,7 @@ class PubListViewModel(application: Application) : AndroidViewModel(application)
 //        refreshPubs()
     }
 
-    private fun refreshPubs(){
+    fun refreshPubs(){
         viewModelScope.launch {
             try{
                 pubRepository.refreshPubs()
