@@ -15,10 +15,7 @@ import kotlin.collections.ArrayList
 class PubAdapter(
     val deleteListener: (Int) -> Unit,
     val clickListener: (Int) -> Unit
-//    val clickListener: RecyclerViewClickListener,
-//    val sortingListener: RecyclerViewSortingListener
 ) : ListAdapter<PubModel, PubAdapter.PubViewHolder>(DiffCallback) {
-
 
     companion object DiffCallback : DiffUtil.ItemCallback<PubModel>() {
         override fun areItemsTheSame(oldItem: PubModel, newItem: PubModel): Boolean {
@@ -28,7 +25,6 @@ class PubAdapter(
         override fun areContentsTheSame(oldItem: PubModel, newItem: PubModel): Boolean {
             return areItemsTheSame(oldItem, newItem)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PubViewHolder {
@@ -56,7 +52,7 @@ class PubAdapter(
                     notifyItemRemoved(position)
                 }
             }
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 val position = absoluteAdapterPosition
                 clickListener(position)
             }

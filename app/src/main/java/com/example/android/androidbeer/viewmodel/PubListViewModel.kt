@@ -13,21 +13,17 @@ class PubListViewModel(application: Application) : AndroidViewModel(application)
     private val pubRepository = PubRepository(PubDatabase.getDatabase(application))
     val pubHolder = pubRepository.pubs
 
-    init {
-//        refreshPubs()
-    }
-
-    fun refreshPubs(){
+    fun refreshPubs() {
         viewModelScope.launch {
-            try{
+            try {
                 pubRepository.refreshPubs()
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("PubListViewModel", e.message.toString())
             }
         }
     }
 
-    fun deletePub(position: Int){
+    fun deletePub(position: Int) {
         pubRepository.deletePub(position)
     }
 }
