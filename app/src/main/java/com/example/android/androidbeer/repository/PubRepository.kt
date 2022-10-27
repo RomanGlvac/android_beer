@@ -1,5 +1,6 @@
 package com.example.android.androidbeer.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.android.androidbeer.database.PubDatabase
@@ -12,21 +13,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PubRepository(private val database: PubDatabase) {
+
+    private val TAG = "PUB_REPOSITORY"
+
     val pubs: LiveData<PubHolder> = Transformations.map(database.pubDao.getAll()) {
         it.asDomainModel()
     }
 
     suspend fun refreshPubs() {
-        withContext(Dispatchers.IO) {
-            val data = Api.retrofitService.getPubs(
-                Request(
-                    collection = "bars",
-                    database = "mobvapp",
-                    dataSource = "Cluster0"
+        try{
+            withContext(Dispatchers.IO) {
+                val data = Api.retrofitService.getPubs(
+                    Request(
+                        collection = "bars",
+                        database = "mobvapp",
+                        dataSource = "Cluster0"
+                    )
                 )
-            )
-            database.pubDao.insert(data.asDatabaseModel())
+                database.pubDao.insert(data.asDatabaseModel())
+            }
+        } catch (exception: Exception){
+            Log.e(TAG, "${exception.javaClass.canonicalName} - ${exception.message.toString()}")
         }
+
     }
 
     fun deletePub(position: Int) {
